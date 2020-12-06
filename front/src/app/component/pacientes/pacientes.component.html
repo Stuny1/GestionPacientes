@@ -1,0 +1,239 @@
+<ion-content style='--padding-start:1%'>
+  <ion-grid *ngIf='pacienteEstado==0'>
+    <ion-row>
+      <ion-col size="12">
+        <h3>Seleccionar Paciente</h3>
+      </ion-col>
+    </ion-row>
+      <div>
+        <ngx-datatable
+          class="material"
+          [limit]="8"
+          [rows]="rows"
+          [rowHeight]="50"
+          [columns]="columns"
+          [columnMode]="'force'"
+          [sortType]="'multi'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+            >
+            <ngx-datatable-column name="name"></ngx-datatable-column>
+            <ngx-datatable-column name="gender"></ngx-datatable-column>
+            <ngx-datatable-column name="age"></ngx-datatable-column>
+            <ngx-datatable-column name="id" [resizeable]="false">
+              <ng-template ngx-datatable-header-template>
+                Action
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button
+                  ion-button
+                  small
+                  outline
+                  color="light"
+                  (click)="ChangePage(1)"
+                  >
+                  Detalles
+                </button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+      </div>
+    </ion-grid>
+    <ion-grid *ngIf='pacienteEstado==1'>
+      <ion-row>
+        <ion-col size='3'>
+          <h5 style='font-weight: bold;'>Paciente</h5>
+          <p>Descripcion Paciente</p>
+        </ion-col>
+        <ion-col size='2'>
+          <p *ngIf='PacienteMod==0' class='font'>rut: 11111111-1</p>
+          <p *ngIf='PacienteMod==0' class='font'>edad: 58</p>
+          <p><ion-input *ngIf='PacienteMod==1' class='SearchInput2' placeholder="Ingrese rut"></ion-input></p>
+          <p><ion-input *ngIf='PacienteMod==1' class='SearchInput2' placeholder="Ingrese Edad"></ion-input></p>
+        </ion-col>
+        <ion-col size='3'>
+          <p *ngIf='PacienteMod==0' class='font'>Telefono: +56973035452</p>
+          <p *ngIf='PacienteMod==0' class='font'>Convenio: Fonasa</p>
+          <p><ion-input *ngIf='PacienteMod==1' class='SearchInput2' placeholder="Ingrese Telefono"></ion-input></p>
+          <p><ion-input *ngIf='PacienteMod==1' class='SearchInput2' placeholder="Ingrese Convenio"></ion-input></p>
+        </ion-col>
+        <ion-col *ngIf='PacienteMod==0' style="display: flex!important;
+        align-content: center!important;
+        align-items: center!important;">
+          <ion-button (click)='changeModState(1)' style="--background:var(--ChiroColor-Primary)">Modificar Datos</ion-button>
+        </ion-col>
+        <ion-col *ngIf='PacienteMod==1' style="display: flex!important;
+        align-content: center!important;
+        align-items: center!important;">
+          <ion-button (click)='changeModState(0)' style="--background:var(--ChiroColor-Primary)">Cancelar</ion-button>
+          <ion-button  style="--background:var(--ChiroColor-Primary)">Confirmar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <h5 style='font-weight: bold;'>Crear Hora</h5>
+      </ion-row>
+      <ion-row>
+        <ion-col size='3'>
+          <ion-item lines="none">
+            <ion-icon style='padding-right: 2%;' name="calendar-outline"></ion-icon>
+            <ion-input style='height: 60%;' class='SearchInput2' placeholder="Ingrese Fecha"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon style='padding-right: 2%;' name="time-outline"></ion-icon>
+            <ion-input style='height: 60%;' type="time" class='SearchInput2' placeholder="Ingrese Hora"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size='3'>
+          <ion-item lines="none">
+            <ion-icon style='padding-right: 2%;' name="medkit-outline"></ion-icon>
+            <ion-input style='height: 60%;' class='SearchInput2' placeholder="Ingrese Medico Tratante"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon style='padding-right: 2%;'  name="keypad-outline"></ion-icon>
+            <ion-input style='height: 60%; ' class='SearchInput2' placeholder="Ingrese servicio"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col *ngIf='PacienteMod==0' style="display: flex!important;
+        align-content: center!important;
+        align-items: center!important;">
+          <ion-button style="--background:var(--ChiroColor-Primary)">Crear Hora</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size='12'>
+          <ngx-datatable
+          class="material"
+          [limit]="8"
+          [rows]="rows"
+          [rowHeight]="50"
+          [columns]="columns"
+          [columnMode]="'force'"
+          [sortType]="'multi'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+            >
+            <ngx-datatable-column name="name"></ngx-datatable-column>
+            <ngx-datatable-column name="gender"></ngx-datatable-column>
+            <ngx-datatable-column name="age"></ngx-datatable-column>
+            <ngx-datatable-column name="id" [resizeable]="false">
+              <ng-template ngx-datatable-header-template>
+                Action
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button
+                  ion-button
+                  small
+                  outline
+                  color="light"
+                  (click)="ChangePage(1)"
+                  >
+                  Detalles
+                </button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: end; cursor: pointer;">
+          <ion-item lines="none">
+            <ion-icon
+              slot="start"
+              style="padding-top: 1%;margin-right:2% ;"
+              name="arrow-back-outline"
+            ></ion-icon>
+            <h4 (click)="ChangePage(-1)">Volver</h4>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf='pacienteEstado==2'>
+      <ion-row>
+        <ion-col size="12">
+          <h2 class="ChiroBoxTitle">Detalles Hora</h2>
+        </ion-col>
+
+      </ion-row>
+      <ion-row class="ChiroBox">
+        <ion-col size="6">
+            <div>
+              <ion-item lines="none">
+                <ion-icon name="thermometer-outline"></ion-icon>
+                <ion-input
+                  class="SearchInput"
+                  placeholder="Medico Tratante"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-icon name="people-outline"></ion-icon>
+                <ion-input
+                  class="SearchInput"
+                  placeholder="Paciente"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-icon name="calendar"></ion-icon
+                ><ion-input
+                  class="SearchInput"
+                  placeholder="Fecha"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-icon name="time-outline"></ion-icon>
+                <ion-input
+                  class="SearchInput"
+                  placeholder="Hora"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                <ion-input
+                  class="SearchInput"
+                  placeholder="Estado"
+                  disabled
+                ></ion-input>
+              </ion-item>
+            </div>
+        </ion-col>
+
+        <ion-col size='6'>
+          <div>
+            <ion-item lines="none">
+              <ion-icon name="cash-outline"></ion-icon>
+              <ion-input
+                class="SearchInput"
+                placeholder="Pago"
+                disabled
+              ></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon name="medkit-outline"></ion-icon>
+              <ion-input
+                class="SearchInput"
+                placeholder="Servicio"
+                disabled
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: end; cursor: pointer;">
+          <ion-item lines="none">
+            <ion-icon
+              slot="start"
+              style="padding-top: 1%;margin-right:2% ;"
+              name="arrow-back-outline"
+            ></ion-icon>
+            <h4 (click)="ChangePage(-1)">Volver</h4>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  
+</ion-content>

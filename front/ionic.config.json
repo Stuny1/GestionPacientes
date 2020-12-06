@@ -1,0 +1,7 @@
+{
+  "name": "Chiro-Front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

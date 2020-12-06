@@ -1,0 +1,8 @@
+com\chiropoint\backend\mocks\AppointmentMock.class
+com\chiropoint\backend\mocks\AppointmentTypeMock.class
+com\chiropoint\backend\logic\AppointmentLogicTests.class
+com\chiropoint\backend\mocks\OrganizationMock.class
+com\chiropoint\backend\ChiropointBackendTests.class
+com\chiropoint\backend\mocks\PatientMock.class
+com\chiropoint\backend\mocks\OfficeWorkerMock.class
+com\chiropoint\backend\mocks\OfficeMock.class

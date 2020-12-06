@@ -1,0 +1,278 @@
+<ion-content class="background" style="--padding-start: 2%; --padding-end: 2%;">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <div>
+          <div (click)="ChangeRoute('BuscarHora')" class="MenuSelector">
+            <h3>Buscar Hora</h3>
+          </div>
+          <div
+            [className]="param == 'BuscarHora' ? 'MenuSelected' : 'inactive'"
+          ></div>
+        </div>
+      </ion-col>
+      <ion-col size="3">
+        <div>
+          <div (click)="ChangeRoute('CrearHora')" class="MenuSelector">
+            <h3>Crear Hora</h3>
+          </div>
+          <div
+            [className]="param == 'CrearHora' ? 'MenuSelected' : 'inactive'"
+          ></div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+    <div *ngIf="param == 'CrearHora'">
+      <div *ngIf="BuscarHoraEstado == 0">
+        <ion-row>
+          <ion-col size="6">
+            <h2 class="ChiroBoxTitle">Seleccionar Fecha Y Hora</h2>
+          </ion-col>
+          <ion-col size="6">
+            <h2 class="ChiroBoxTitle">Seleccionar Doctor</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" >
+            <div class="ChiroBox">
+              <!--<ion-item lines="none">
+                <ion-icon name="calendar"></ion-icon
+                ><ion-input
+                  class="SearchInput"
+                  placeholder="Ingrese Fecha"
+                  disabled
+                ></ion-input>
+              </ion-item>-->
+              <div class="calendar">
+                <ionic-calendar-date-picker
+                [backgroundStyle]="{'text-align': 'center', 'font-size': '18px'}"
+                 [notInCalendarStyle]="{'color': 'red', 'font-weight': 'bold'}"
+                 [dayLabelsStyle] = "{ 'font-weight': 1000, 'font-size': '15px', 'text-align': 'center' }"
+                 [itemSelectedStyle] = "{ 'background': '#84288e', 'text-align': 'center', 'color': '#f4f4f4 !important' , 'font-weight': 'bold' }"
+                  (onSelect)="presentAlertConfirm($event)"
+                  [dayLabels]="dias"
+                  [monthLabels]="meses"
+                ></ionic-calendar-date-picker>
+              </div>
+              <ion-item lines="none" style="margin-bottom: 1%;"
+                >Seleccionar Hora</ion-item
+              >
+              <ion-item style="margin-top: 1%;" lines="none">
+                <ion-icon name="time-outline"></ion-icon>
+                <ion-input class="SearchInput">
+                  <ion-datetime
+                  #mydt
+                  [pickerOptions]="customPickerOptions"
+                  cancelText="Cancelar"
+                  doneText="Seleccionar"
+                  displayFormat="hh-mm-A"
+                  placeholder="Seleccionar Hora"
+                  (ionChange)="Hora(mydt.value)"
+                  [(ngModel)]="horaSet">
+                </ion-datetime>
+                </ion-input>
+
+              </ion-item>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ChiroBox">
+              <ion-list>
+                <ion-item button *ngFor="let doctor of DoctorList; let i = index" [class.highlight]="i === currentSelected" (click)="onItemClicked(i,doctor)">
+                  <ion-thumbnail slot="start">
+                    <img
+                      src={{doctor.profilepic}}
+                      />
+                    </ion-thumbnail>
+                  <ion-label>{{doctor.nombre}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: end; cursor: pointer;">
+            <ion-item lines="none"
+              ><h2 slot="end" (click)="ChangePage(1)">Siguiente</h2>
+              <ion-icon
+                slot="end"
+                style="padding-top: 1%;"
+                name="arrow-forward-outline"
+              ></ion-icon
+            ></ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngIf="BuscarHoraEstado == 1">
+        <ion-row>
+          <ion-col size="6">
+            <h2 class="ChiroBoxTitle">Seleccionar Paciente</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-col size="6">
+              <div class="ChiroBox">
+                <ion-list>
+                  <ion-item button *ngFor="let paciente of PacienteList; let b = index" [class.highlight2]="b === currentSelected2" (click)="onPacienteClicked(b,paciente)">
+                    <ion-thumbnail slot="start">
+                      <img
+                      src={{paciente.profilepic}}
+                        />
+                      </ion-thumbnail>
+                    <ion-label>{{paciente.nombre}}</ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-col>
+          </ion-col>
+          <ion-col size="6"> </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: end; cursor: pointer;">
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                style="padding-top: 1%;"
+                name="arrow-back-outline"
+              ></ion-icon>
+              <h2 (click)="ChangePage(-1)">Volver</h2>
+              <h2 (click)="crearhora()" slot="end">Crear Hora</h2>
+              <ion-icon
+                slot="end"
+                style="padding-top: 1%;"
+                name="arrow-forward-outline"
+              ></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <div *ngIf="param == 'BuscarHora'">
+      <div *ngIf="BuscarHoraEstado == 0">
+            <ngx-datatable
+          class="material"
+          [limit]="8"
+          [rows]="SesionList"
+          [rowHeight]="50"
+          [columns]="columns"
+          [columnMode]="'force'"
+          [sortType]="'multi'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          (activate)="onActivate($event)"
+            >
+            <ngx-datatable-column name="Numero"></ngx-datatable-column>
+            <ngx-datatable-column name="Paciente"></ngx-datatable-column>
+            <ngx-datatable-column name="Doctor"></ngx-datatable-column>
+            <ngx-datatable-column name="Fecha"></ngx-datatable-column>
+            <ngx-datatable-column name="id" [resizeable]="false">
+              <ng-template ngx-datatable-header-template>
+                Accion
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button
+                  ion-button
+                  small
+                  outline
+                  color="light"
+
+                  >
+                  Detalles
+                </button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+      </div>
+
+
+      <div style='margin-top: 2%;' *ngIf="BuscarHoraEstado == 1">
+        <ion-row>
+          <ion-col style="text-align: end; cursor: pointer;">
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                style="padding-top: 1%;margin-right:2% ;"
+                name="arrow-back-outline"
+              ></ion-icon>
+              <h4 (click)="BuscarHoraEstado=BuscarHoraEstado-1">Volver</h4>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <h2 class="ChiroBoxTitle">Detalles Hora</h2>
+          </ion-col>
+
+        </ion-row>
+        <ion-row class="ChiroBox">
+          <ion-col size="6">
+              <div>
+                <ion-item lines="none">
+                  <ion-icon name="thermometer-outline"></ion-icon>
+                  <ion-select [(ngModel)]='ModifySesion.chiropractor' class="SearchInput" cancelText="Volver" okText="Aceptar" style='min-width: 90%;' placeholder="Seleccionar Medico">
+                    <ion-select-option *ngFor='let user of ModifyChiro' [value]="user.id">{{user.name.firstName}} {{user.name.lastName1}} </ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-icon name="people-outline"></ion-icon>
+                  <ion-select [(ngModel)]='ModifySesion.paciente' class="SearchInput" cancelText="Volver" okText="Aceptar" style='min-width: 90%;' placeholder="Seleccionar Paciente">
+                    <ion-select-option *ngFor='let user of ModifyUser' [value]="user.id">{{user.name.firstName}} {{user.name.lastName1}} </ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-icon name="calendar"></ion-icon
+                  ><ion-input
+                    class="SearchInput"
+                    placeholder="Fecha"
+                    [value]="ModifySesion.fecha"
+                  ></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <ion-input
+                    class="SearchInput"
+                    placeholder="Hora"
+                    [value]="ModifySesion.hora"
+                  ></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  <ion-input
+                    class="SearchInput"
+                    placeholder="Estado"
+                    [(ngModel)]='ModifySesion.estado'
+                  ></ion-input>
+                </ion-item>
+              </div>
+          </ion-col>
+
+          <ion-col size='6'>
+            <div>
+              <ion-item lines="none">
+                <ion-icon name="cash-outline"></ion-icon>
+                <ion-input
+                  class="SearchInput"
+                  placeholder="Pago"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-icon name="medkit-outline"></ion-icon>
+                <ion-input
+                  class="SearchInput"
+                  placeholder="Servicio"
+                  [(ngModel)]='ModifySesion.servicio'
+                ></ion-input>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>

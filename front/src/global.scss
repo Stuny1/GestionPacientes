@@ -1,0 +1,166 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+@import '~assets/styles/ngx-datatable/_index.css';
+@import '~assets/styles/ngx-datatable/_dark.css';
+@import '~assets/styles/ngx-datatable/_material.css';
+@import '~assets/styles/ngx-datatable/_bootstrap.css';
+@import '~assets/styles/ngx-datatable/_icons.css';
+
+.linea{
+
+
+    border-bottom: 2px blue;
+}
+
+ion-menu{
+    ion-item,
+    ion-list, .list-md,
+    ion-header,
+    ion-content{
+        --background: var(--ChiroColor-Primary);
+        --ion-background-color: var(--ChiroColor-Primary);
+    }
+    ion-item,ion-title{
+        color: var(--text-color);
+    }
+    ion-item{
+
+        --color-hover: #92949c;
+
+    }
+    .icon {
+        display: inline-block;
+        font-size: 35px;
+        color: #ffC977;
+        vertical-align: middle;
+       }
+    .text{
+        padding-left: 5px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    ion-item.head{
+        ion-label{
+            padding:0px;
+            margin:0px;
+            --min-height:25px;}
+        --background: var(--ChiroColor-Secondary);
+        --min-height: 25px;
+
+    }
+    ion-title{
+        text-align: center;
+    }
+    ion-icon{
+        color: #21a3ee;
+    }
+    
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    min-width: 15%!important;
+    max-width: 15%!important;
+}
+.SearchInput{
+    border:3px solid #94acb4;
+    border-radius:6px;
+    text-indent: 5px;
+    
+}
+
+.SearchInput2{
+    border:3px solid #94acb4;
+    border-radius:30px;
+    text-indent: 5px;
+    height: 16%;
+    font-size: 60%;
+}
+
+.font{
+    font-style: italic;
+}
+.Center{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+}
+
+.ChiroBox{
+
+    ion-item{
+
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        margin-right: 3vh ;
+        margin-left: 1vh;
+
+    }
+
+    ion-icon{
+        margin-right:2%;
+    }
+    .calendar{
+
+        width:90%;
+        margin:5%;
+
+    }
+    border: 3px solid var(--ChiroColor-Secondary);
+    
+    border-radius: 3vh;
+}
+
+.ChiroBoxTitle{
+
+    padding-left:3vh;
+
+}
+
+.MenuSelector{
+    border-bottom: 2px solid var(--ChiroColor-Secondary);
+    text-align: center;
+}
+
+.MenuSelector:hover{
+    border-bottom: 2px solid var(--ChiroColor-Primary);
+    cursor: pointer;
+    
+}
+
+.MenuSelected{
+    border-bottom: 2px solid var(--ChiroColor-Primary);
+    justify-content: center;
+    display: flex;
+    margin-inline: 17%;
+    margin-top: 5px;
+}
+

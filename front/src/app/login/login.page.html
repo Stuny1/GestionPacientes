@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large" class="ion-text-center">ChiroPoint</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="background">
+<ion-row>
+  <ion-col>
+    </ion-col>
+    <ion-col>
+  <form class="line-input">
+    <ion-item >
+      <ion-label position="floating">Email</ion-label>
+      <ion-input class="ion-text-center" type="text" #email required></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating">Password</ion-label>
+      <ion-input class="ion-text-center" type="password" #password required></ion-input>
+    </ion-item>
+      <ion-button class="color" type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
+
+  </form>
+  </ion-col>
+  <ion-col>
+  </ion-col>
+  </ion-row>
+</ion-content>
